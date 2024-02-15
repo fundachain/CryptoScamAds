@@ -40,30 +40,34 @@ let sent = 0,
   failed = 0,
   res;
 await page.evaluate(() => {
-  let tName, tBody, tLink, tmp, result;
+  let tName, tBody, tLink, tweet, tmp, result;
 });
 while (true) {
   await sleep(1000);
   console.log("checking...");
   res = await page.evaluate(async (config) => {
     result = [];
-    document
-      .querySelectorAll(config.selectorAds)
-      .forEach(async (e) => {
-        tmp =
-          e?.children?.[4]?.children[0].children[0].children[1].children[1]
-            .children;
-        if (tmp) {
-          [tName, tBody, tLink] = tmp;
-          tName = tName?.innerText;
-          tBody = tBody?.innerText;
-          tLink = tLink?.children[1]?.href;
-          tmp = { tName, tBody, tLink };
-          result.push({ tName, tBody, tLink });
-        }
-      });
+    document.querySelectorAll(config.selectorAds).forEach(async (e) => {
+      tmp =
+        e?.children?.[4]?.children[0].children[0].children[1].children[1]
+          .children;
+      if (tmp) {
+        [tName, tBody, tLink, tweet] = tmp;
+        tmp = {
+          tweet:
+            tweet?.children[0]?.children[0]?.children[3]?.children[0].href.replace(
+              "/analytics",
+              ""
+            ),
+          name: tName?.innerText.replace(" Ad", ""),
+          body: tBody?.innerText,
+          url: tLink?.children[1]?.href,
+        };
+        result.push(tmp);
+      }
+    });
     return result;
-  },config);
+  }, config);
   if (!res) continue;
   for (let i of res) {
     await createData(i)
@@ -80,10 +84,7 @@ while (true) {
     );
   }
   await page.evaluate((config) => {
-    document
-      .querySelectorAll(config.selectorAds)
-      .forEach(e=>e.remove())
+    document.querySelectorAll(config.selectorAds).forEach((e) => e.remove());
     window.scrollBy(0, 5000);
-  },config);
+  }, config);
 }
-
