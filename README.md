@@ -1,4 +1,4 @@
-# CryptoscamAds Project
+# twitterAds-scrapper
 
 ## Overview
 CryptoscamAds is a powerful tool designed to crawl Twitter Ads and identify potential cryptocurrency scam advertisements. Stay informed about scam activities in the crypto space by utilizing this application.
