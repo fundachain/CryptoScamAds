@@ -15,16 +15,15 @@ CryptoscamAds crawls your Twitter account, collects advertisements, and compiles
 To get started with CryptoscamAds, follow these steps:
 
 1. Configure the settings in the config.js file:
+   - Set the desired number of ads to crawl (`adsCount`).
+   - Update your firebase API key (`firebaseAPI`).
+   - Specify the path to your Chrome executable (`chromePATH`).
+   - Enable or disable the proxy and provide details if needed (`proxy`).
 
-Set the desired number of ads to crawl (adsCount).
-Update your Firebase API key (firebaseAPI).
-Specify the path to your Chrome executable (chromePATH).
-Enable or disable the proxy and provide details if needed (proxy).
-Adjust the selector based on Twitter's HTML structure (selectorAds).
 
 2. Configure Firebase:
 
-Visit fundachain.com to check our detailed report.
+   -  [Firebase](https://firebase.google.com) 
 
 3. Install the required dependencies and Execute the application:
    ```bash
